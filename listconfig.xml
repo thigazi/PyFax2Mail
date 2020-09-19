@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<configuration>
+<settings>
+<username>smtpusername</username>
+<password>smtppassword</password>
+<host>smtp.myhost.com</host>
+<port>587</port>
+</settings>
+<mailingfrom>fax2mail@myhost.com</mailingfrom>
+<mailingreceiver>
+<receiverto>
+  <mail>mymail@host.com</mail>
+</receiverto>
+<receivercc>
+  <mail>mymail2@host.com</mail>
+</receivercc>
+<receiverbcc>
+  <mail>mymail3@host.com</mail>
+</receiverbcc>
+</mailingreceiver>
+</configuration>
