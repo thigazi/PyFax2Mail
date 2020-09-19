@@ -1,5 +1,5 @@
 # PyFax2Mail
-This is a Python implementation to send incoming FAX directly by Mail to a set of recipients of your choice, from the PBX dialplan straight forward.\
+This is a Python Application that is implementated inside the dialplan to send incoming FAX from the **PBX System Freeswitch** directly by Mail to a set of recipients of your choice.\
 \
 The implementation is using the mod_python package of freeswitch.\
 The debian package of freeswitch is compiled in python 2.7.
@@ -8,12 +8,15 @@ The code is written to support Python 2.7 and +3.5 syntax.\
 If you update freeswitch and future versions of mod_python is compiled in 3.x the code will still execute without throwing errors.
 
 Requirements:\
-You need the tiff tools package
+You need the tiff tools package\
+Freeswitch mod_python Module\
+Mail Servers with "starttls" authentication (other auth mechanism will follow)
 
 **Installation:**
 
 1st you need to figure out where the PYTHONPATH inside FS points.\
-Start the fs_cli console and execute **env system** example:
+Start the fs_cli console and execute **env system**\
+Example:
 
 ```
 freeswitch@tuxtux> system env
@@ -28,11 +31,11 @@ PWD=/usr/local/src/fs
 DAEMON_OPTS=-nonat
 PYTHONPATH=/usr/share/freeswitch/scripts
 ```
-it tells you where the python path points, and there we clone the app.\
-Change to "/usr/share/freeswitch/scripts" and clone the app.
+The cli output tells you where the python path points, and there we clone the app.\
+Change to "/usr/share/freeswitch/scripts" and clone the app as.
 
-On my machine this folder is owned by the user freeswitch.\
-In this case we clone the app as the user freeswitch
+On my machine this folder is owned by the user freeswitch.
+
 ```
 sudo -u freeswitch -g freeswitch git clone https://github.com/thigazi/PyFax2Mail.git fs
 sudo -u freeswitch -g freeswitch touch __init__.py
@@ -54,6 +57,7 @@ Here is a complete sample for receiving a fax, converting it to pdf and handover
 <action application="set" data="pdffile=/var/spool/spandsp/${uuid}.pdf"/>
 <action application="set" data="tiffile=/var/spool/spandsp/${uuid}.tiff"/>
 <action application="python" data="fs.mailer"/>
+<action application="hangup" />
 ```
 
 the last thing to do is to configure the listconfig.xml, which is quiet self explaining :-)
